@@ -1,0 +1,132 @@
+# plaud4All Configuration
+
+# Recording categories and their properties
+categories:
+  meeting:
+    color: blue
+    icon: "💼"
+    description: "Business meetings, team sync, client calls"
+    processing:
+      enable_diarization: true
+      enable_summary: false  # MVP: transcription only
+      priority: high
+
+  class:
+    color: green
+    icon: "📚"
+    description: "College classes, lectures, seminars"
+    processing:
+      enable_diarization: false
+      enable_summary: false  # MVP: transcription only
+      priority: high
+
+  lecture:
+    color: purple
+    icon: "🎓"
+    description: "Conferences, talks, presentations"
+    processing:
+      enable_diarization: false
+      enable_summary: false  # MVP: transcription only
+      priority: medium
+
+  chat:
+    color: yellow
+    icon: "💬"
+    description: "Casual conversations, informal discussions"
+    processing:
+      enable_diarization: true
+      enable_summary: false  # MVP: transcription only
+      priority: low
+
+  interview:
+    color: red
+    icon: "🎤"
+    description: "Job interviews, user research, Q&A sessions"
+    processing:
+      enable_diarization: true
+      enable_summary: false  # MVP: transcription only
+      priority: high
+
+  other:
+    color: gray
+    icon: "🎙️"
+    description: "Other types of recordings"
+    processing:
+      enable_diarization: false
+      enable_summary: false  # MVP: transcription only
+      priority: low
+
+# File naming pattern
+# Expected format: YYYY-MM-DD_[category]_[title].m4a
+file_naming:
+  date_format: "%Y-%m-%d"
+  separator: "_"
+  allowed_extensions:
+    - ".m4a"
+    - ".mp3"
+    - ".wav"
+    - ".aac"
+  max_title_length: 100
+
+# Transcription settings
+transcription:
+  gemini:
+    model: "gemini-1.5-flash"
+    temperature: 0.2
+    enable_diarization_prompt: true
+    language: "en"  # or "pt", "es", etc.
+    max_retries: 3
+    retry_delay_seconds: 5
+
+  openai:
+    model: "whisper-1"
+    language: "en"
+    response_format: "json"
+
+  whisper_local:
+    model_size: "base"
+    language: "en"
+    task: "transcribe"
+    fp16: false
+
+# Notion database schema
+# These properties will be created in the Notion database
+notion:
+  properties:
+    - name: "Title"
+      type: "title"
+
+    - name: "Date"
+      type: "date"
+
+    - name: "Category"
+      type: "select"
+      options: ["meeting", "class", "lecture", "chat", "interview", "other"]
+
+    - name: "Status"
+      type: "select"
+      options: ["Processing", "Completed", "Failed"]
+
+    - name: "Transcription"
+      type: "rich_text"
+
+    - name: "Audio File"
+      type: "url"
+
+    - name: "Duration (minutes)"
+      type: "number"
+
+    - name: "Word Count"
+      type: "number"
+
+    - name: "Processing Time (seconds)"
+      type: "number"
+
+# Processing pipeline
+pipeline:
+  retry_attempts: 3
+  retry_delay_seconds: 5
+  cleanup_after_processing: false  # Keep original files (configurable via .env)
+  archive_processed_files: true    # Archive after processing (configurable via .env)
+  max_file_size_mb: 500            # Maximum audio file size
+  timeout_minutes: 30              # Maximum processing time per file

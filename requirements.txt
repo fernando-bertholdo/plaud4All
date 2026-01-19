@@ -1,0 +1,35 @@
+# Core dependencies
+python-dotenv>=1.0.0
+pyyaml>=6.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# File monitoring
+watchdog>=3.0.0
+
+# Transcription services
+google-generativeai>=0.3.0  # Gemini API
+# openai>=1.0.0  # Optional: for OpenAI Whisper API (uncomment if needed)
+# openai-whisper>=1.0.0  # Optional: for local Whisper (uncomment if needed)
+
+# Notion integration
+notion-client>=2.2.0
+
+# Audio processing
+pydub>=0.25.1
+
+# Utilities
+requests>=2.31.0
+python-dateutil>=2.8.2
+
+# Logging
+loguru>=0.7.0
+structlog>=23.0.0
+
+# Development dependencies
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-mock>=3.12.0
+black>=23.0.0
+ruff>=0.1.0
+mypy>=1.7.0

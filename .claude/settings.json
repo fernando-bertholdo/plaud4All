@@ -1,9 +1,62 @@
 {
-  "enabledPlugins": {
-    "context7@claude-plugins-official": true,
-    "github@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
-    "linear@claude-plugins-official": true,
-    "Notion@claude-plugins-official": true
+  "project": {
+    "name": "plaud4All",
+    "description": "Open-source self-hosted recording and transcription pipeline using phone + iCloud + Gemini API + Notion",
+    "version": "0.1.0"
+  },
+  "permissions": {
+    "allowedTools": [
+      "Read",
+      "Write",
+      "Edit",
+      "Bash",
+      "Glob",
+      "Grep",
+      "Task"
+    ]
+  },
+  "env": {
+    "PYTHON_VERSION": "3.9+",
+    "PROJECT_TYPE": "pipeline",
+    "STACK": "Python + Gemini API + Notion API"
+  },
+  "hooks": {},
+  "model": {
+    "default": "claude-haiku-4-5-20251001"
+  },
+  "memory": {
+    "autoLoad": true,
+    "path": ".claude/CLAUDE.md"
+  },
+  "commands": {
+    "enabled": true,
+    "path": ".claude/commands"
+  },
+  "settings": {
+    "maxContextLength": 200000,
+    "preferMarkdownLinks": true,
+    "autoSaveSession": true
+  },
+  "planMode": {
+    "enabled": true,
+    "qualityFirst": true,
+    "snippetMaxLines": 10
+  },
+  "gitignore": {
+    "respectGitignore": true,
+    "additionalPatterns": [
+      ".env",
+      ".env.local",
+      "*.pyc",
+      "__pycache__/",
+      ".pytest_cache/",
+      ".coverage",
+      "htmlcov/",
+      "*.log",
+      "*.m4a",
+      "*.mp3",
+      "*.wav",
+      "audio_cache/"
+    ]
   }
 }
